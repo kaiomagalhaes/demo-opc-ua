@@ -15,6 +15,19 @@ const collectionName = process.env.COLLECTION_NAME;
     const db = client.db(dbName);
     const collection = db.collection(collectionName);
 
+    // Function to erase all data from the database
+    async function clearDatabase() {
+        try {
+            await collection.deleteMany({});
+            console.log("All data erased from MongoDB.");
+        } catch (error) {
+            console.error("Error erasing data from MongoDB:", error);
+        }
+    }
+
+    // Clear the database at startup
+    await clearDatabase();
+
     // Initialize OPC UA server
     const server = new opcua.OPCUAServer({
         port: 4840,
@@ -33,23 +46,24 @@ const collectionName = process.env.COLLECTION_NAME;
         browseName: "Arduino",
     });
 
-    // Add a variable that represents the LuxValue
+    // Add a variable that represents the SensorData
     namespace.addVariable({
         componentOf: device,
         nodeId: "ns=1;s=the.node.identifier",
-        browseName: "LuxValue",
-        dataType: "Double",
+        browseName: "SensorData",
+        dataType: "String", // Change to String to handle JSON
         value: {
-            get: () => new opcua.Variant({ dataType: opcua.DataType.Double, value: 0 }),
+            get: () => new opcua.Variant({ dataType: opcua.DataType.String, value: "" }),
             set: async (variant) => {
-                const luxValue = variant.value;
+                const dataString = variant.value;
                 try {
+                    const data = JSON.parse(dataString);
                     await collection.insertOne({
+                        ...data,
                         nodeId: "ns=1;s=the.node.identifier",
-                        luxValue: luxValue,
                         timestamp: new Date()
                     });
-                    console.log("New Lux value inserted into MongoDB.");
+                    console.log("New data inserted into MongoDB.");
                 } catch (error) {
                     console.error("Error updating MongoDB:", error);
                 }

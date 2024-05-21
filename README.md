@@ -7,10 +7,10 @@ This project is a key component in the tutorial [Building a minimal OPC UA integ
 ## Features
 
 - **OPC UA Server**: Implements an OPC UA server using the `node-opcua` library, allowing for standardized communication within industrial and IoT systems.
-- **OPC UA Client**: Reads Lux values from a file and sends them to the OPC UA server.
+- **OPC UA Client**: Reads sensor data from a CSV file and sends it to the OPC UA server.
 - **File-Based Data Input**: Simulates sensor data by reading from a file, making it easy to test and demonstrate OPC UA capabilities without actual hardware.
-- **Real-Time Data Processing**: Processes and stores real-time Lux values, facilitating immediate insights and actions.
-- **MongoDB Integration**: Stores received Lux values in a MongoDB database, providing a robust mechanism for data persistence and later analysis.
+- **Real-Time Data Processing**: Processes and stores real-time sensor data, facilitating immediate insights and actions.
+- **MongoDB Integration**: Stores received sensor data in a MongoDB database, providing a robust mechanism for data persistence and later analysis.
 
 ## Prerequisites
 
@@ -41,7 +41,7 @@ Before starting, ensure you have the following:
    docker-compose up
    ```
 
-The OPC UA client will read Lux values from `data/client-data.json` and send them to the OPC UA server every second. The server will process and store the data in the MongoDB database.
+The OPC UA client will read sensor data from data/predictive_maintenance.csv and send them to the OPC UA server every second. The server will process and store the data in the MongoDB database.
 
 ## Contributing
 
