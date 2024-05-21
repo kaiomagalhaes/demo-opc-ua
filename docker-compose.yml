@@ -1,0 +1,28 @@
+version: '3'
+services:
+  opcua-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+    container_name: opcua-server
+    ports:
+      - "4840:4840"
+    networks:
+      - opcua-network
+
+  opcua-client:
+    build:
+      context: .
+      dockerfile: Dockerfile.client
+    container_name: opcua-client
+    depends_on:
+      - opcua-server
+    volumes:
+      - ./data:/usr/src/app/data
+    networks:
+      - opcua-network
+
+
+networks:
+  opcua-network:
+    driver: bridge

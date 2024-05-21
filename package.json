@@ -1,0 +1,17 @@
+{
+  "name": "demo-opc-ua",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "mongodb": "^6.5.0",
+    "node-opcua": "^2.123.0"
+  }
+}
