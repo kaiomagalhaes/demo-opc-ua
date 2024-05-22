@@ -30,6 +30,8 @@ Before starting, ensure you have the following:
    ```bash
    git clone https://github.com/kaiomagalhaes/opc-ua-client-server
    ```
+2. **Add your credentials**:  
+   in the root folder you'll find a .env.example, copy it and create a .env. Once it is created you need to add the env vars
 
 ## Usage
 
